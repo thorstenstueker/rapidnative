@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RapidNative – a Visual Basic style language, native code, safe like Rust</title>
-<meta name="description" content="RapidNative: a Visual Basic style language with its own compiler on LLVM. Native code for desktop, web, mobile and microcontrollers, memory safety at compile time, an IDE and a visual designer.">
+<title>tsbRapidNative – a BASIC-family language that compiles to native apps</title>
+<meta name="description" content="tsbRapidNative, part of the tsbRapid family: a BASIC-family language with its own compiler on LLVM. Native code for desktop, web, mobile and microcontrollers, memory safety at compile time, an IDE and a visual designer.">
 <style>
 :root{--bg:#fff;--fg:#1b2430;--mute:#5b6675;--line:#e3e7ec;--soft:#f4f6f8;--acc:#2274c0;--code:#1f2730;--codefg:#e6e9ee}
 @media(prefers-color-scheme:dark){:root{--bg:#14181e;--fg:#e8ecf1;--mute:#9aa6b4;--line:#2b333d;--soft:#1b2129;--acc:#5aa7ea;--code:#0e1216}}
@@ -49,24 +49,24 @@ footer{max-width:1120px;margin:auto;padding:30px 24px 60px;color:var(--mute);fon
 </head>
 <body>
 <nav><div>
-<b>RapidNative</b>
+<b>tsbRapidNative</b>
 <a href="#sprache">Language</a><a href="#designer">Designer</a><a href="#ide">IDE</a><a href="#plattformen">Platforms</a><a href="#web">Web</a><a href="#sicherheit">Safety</a><a href="#tempo">Speed</a><a href="#toolchain">Toolchain</a>
 </div></nav>
 
 <header>
 <h1>Write it like Visual Basic or Xojo.<br>Run it as a native app.</h1>
-<p class="lead">RapidNative is a Visual Basic style language with its own compiler. It compiles through LLVM to machine code, with no virtual machine and no garbage collector. Memory errors and data races fail at compile time.</p>
+<p class="lead">tsbRapidNative is part of the tsbRapid family: a BASIC-family language with its own compiler. It compiles through LLVM to machine code, with no virtual machine and no garbage collector. Ownership checks, inspired by Rust, catch most memory errors and data races at compile time.</p>
 <span class="tag">Windows</span><span class="tag">macOS</span><span class="tag">Linux</span><span class="tag">Android</span><span class="tag">iOS</span><span class="tag">Web</span><span class="tag">WebAssembly</span><span class="tag">ESP32</span><span class="tag">Bare Metal</span>
-<figure class="hero"><img src="img/designer-desktop.png" alt="The RapidNative designer with a form" width="1400" height="900"><figcaption>The designer: drag components onto the form, set properties, and the result is an ordinary class.</figcaption></figure>
+<figure class="hero"><img src="img/designer-desktop.png" alt="The tsbRapidNative designer with a form" width="1400" height="900"><figcaption>The designer: drag components onto the form, set properties, and the result is an ordinary class.</figcaption></figure>
 </header>
 
 <section id="sprache">
 <h2>The language</h2>
-<p class="intro">Familiar to anyone who knows Visual Basic or Xojo, with the guarantees of Rust. Every example below is real RapidNative code.</p>
+<p class="intro">If you have used Visual Basic or Xojo, the syntax will feel familiar. Ownership checks are inspired by Rust. Every example below is real tsbRapidNative code.</p>
 <div class="g2">
 <div><h3>Hello world</h3><pre>Module Main
     Sub Main()
-        Print "Hello from RapidNative!"
+        Print "Hello from tsbRapidNative!"
         Dim i As Integer
         For i = 1 To 3
             Print i &amp; " squared is " &amp; i * i
@@ -164,11 +164,11 @@ End Class</pre>
 
 <section id="ide">
 <h2>The IDE</h2>
-<p class="intro"><code>rnide</code> is RapidNative's own development environment: an editor with language features, a variables panel, debugger, Git, terminal, project wizard and installer dialog. It is built with tsbRapidUI itself.</p>
+<p class="intro"><code>rnide</code> is tsbRapidNative's own development environment: an editor with language features, a variables panel, debugger, Git, terminal, project wizard and installer dialog. It is built with tsbRapidUI itself.</p>
 <figure><img src="img/ide-desktop.png" alt="The rnide IDE with a form in the editor" loading="lazy" width="1500" height="950"><figcaption>Editor with project tree, outline and the designer banner</figcaption></figure>
 <div class="g3" style="margin-top:26px">
 <div class="card"><h3>Language server</h3><p>Diagnostics as you type, including ownership checks, completion, rename, references.</p></div>
-<div class="card"><h3>Debugger</h3><p>Breakpoints, variables, call stack, threads. Remote debugging through <code>rnc debug-agent</code>.</p></div>
+<div class="card"><h3>Debugger</h3><p>Breakpoints, variables, call stack, threads.</p></div>
 <div class="card"><h3>Packages</h3><p><code>rnc package</code> builds <code>.deb</code>, <code>.rpm</code>, a Windows setup and <code>.pkg</code> without third-party tools.</p></div>
 <div class="card"><h3>AI.info</h3><p>Every project contains what an AI assistant needs: the language, grammar, diagnostics and the exact form layout.</p></div>
 <div class="card"><h3>Tests</h3><p><code>&lt;Test&gt;</code> procedures, a formatter and HTML docs are part of <code>rnc</code>.</p></div>
@@ -189,7 +189,7 @@ End Class</pre>
 
 <section id="plattformen">
 <h2>Platforms</h2>
-<p class="intro">One language, one interface, every target. Output is identical everywhere because number formatting and text handling live in RapidNative's own runtime.</p>
+<p class="intro">One language, one interface, every target. Output is identical everywhere because number formatting and text handling live in tsbRapidNative's own runtime.</p>
 <div class="wrap"><table>
 <tr><th>Target</th><th>Result</th><th>Status</th></tr>
 <tr><td>Linux x64, ARM64, ARMv7</td><td>a single executable</td><td class="ok">built and run</td></tr>
@@ -234,7 +234,7 @@ rnc build . --target ios-arm64 --emit lib</pre></div>
 
 <section id="web" class="alt"><div>
 <h2>Web: one file is the server</h2>
-<p class="intro">With tsbRapidN Web the application runs on the server and every user gets their own session. Program logic and data never leave the server. HTTPS with Let's Encrypt is built in, so no nginx is needed.</p>
+<p class="intro">With tsbRapidN Web the application runs on the server and every user gets their own session. Program logic and data never leave the server. Automatic HTTPS through ACME is built in, for example with Let's Encrypt, so no nginx is needed.</p>
 <div class="g2">
 <figure><img src="img/web-chrome.png" alt="Sign-in page in the browser" loading="lazy" width="1200" height="800"><figcaption>The sign-in page of the web template, a real request to the running program</figcaption></figure>
 <div>
@@ -254,7 +254,7 @@ rnc build . --target ios-arm64 --emit lib</pre></div>
 
 <section id="sicherheit">
 <h2>Safety, tested in practice</h2>
-<p class="intro">What usually surfaces at the customer is stopped here by the compiler or a defined abort.</p>
+<p class="intro">Many errors that usually surface at the customer are stopped here by the compiler or a defined abort.</p>
 <div class="wrap"><table>
 <tr><th>Error</th><th>Behaviour</th></tr>
 <tr><td>Use after move</td><td>Compile error RN2001</td></tr>
@@ -274,7 +274,7 @@ rnc build . --target ios-arm64 --emit lib</pre></div>
 <h2>Speed</h2>
 <p class="intro">Five identical tasks in milliseconds, median of three runs, AMD Ryzen 7 5825U. Python is a single run.</p>
 <div class="wrap"><table>
-<tr><th>Task</th><th class="r">RapidNative</th><th class="r">C#/.NET 10</th><th class="r">Python 3.14</th></tr>
+<tr><th>Task</th><th class="r">tsbRapidNative</th><th class="r">C#/.NET 10</th><th class="r">Python 3.14</th></tr>
 <tr><td>Recursion, fib(35)</td><td class="r">35</td><td class="r">56</td><td class="r">1040</td></tr>
 <tr><td>Sieve, 5 million</td><td class="r">40</td><td class="r">26</td><td class="r">579</td></tr>
 <tr><td>Floating point, 20 million</td><td class="r">60</td><td class="r">60</td><td class="r">2008</td></tr>
@@ -295,6 +295,6 @@ Thanks for waiting. The toolchain is ready.</pre>
 <p class="small">Packages: <a href="https://github.com/thorstenstueker/rapidnative-toolchain/releases">rapidnative-toolchain</a>. For machines without internet there is <code>rnc toolchain import</code>.</p>
 </section>
 
-<footer><p>RapidNative 0.11.0 · MIT OR Apache-2.0 · All images are real captures of the software.</p><p>Visual Basic is a trademark of Microsoft Corporation. Xojo is a trademark of Xojo, Inc. RapidNative is an independent project and is not affiliated with, endorsed by or sponsored by Microsoft Corporation or Xojo, Inc. All other trademarks are the property of their respective owners.</p></footer>
+<footer><p>tsbRapidNative, part of the tsbRapid family · MIT OR Apache-2.0 · All images are real captures of the software.</p><p>Visual Basic and Windows are trademarks of Microsoft Corporation. Xojo is a trademark of Xojo, Inc. Rust is a trademark of the Rust Foundation. Apple, macOS, iOS and Xcode are trademarks of Apple Inc. Android is a trademark of Google LLC. Oracle and MySQL are trademarks of Oracle and/or its affiliates. tsbRapidNative is an independent project and is not affiliated with, endorsed by or sponsored by any of these companies. All other trademarks are the property of their respective owners.</p></footer>
 </body>
 </html>
