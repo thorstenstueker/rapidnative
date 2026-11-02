@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RapidNative – VB-artige Sprache, nativer Code, sicher wie Rust</title>
-<meta name="description" content="RapidNative: VB-artige Sprache mit eigenem Compiler über LLVM. Nativer Code für Desktop, Web, Mobile und Mikrocontroller, Speichersicherheit beim Übersetzen, IDE und Designer.">
+<title>RapidNative – a Visual Basic style language, native code, safe like Rust</title>
+<meta name="description" content="RapidNative: a Visual Basic style language with its own compiler on LLVM. Native code for desktop, web, mobile and microcontrollers, memory safety at compile time, an IDE and a visual designer.">
 <style>
 :root{--bg:#fff;--fg:#1b2430;--mute:#5b6675;--line:#e3e7ec;--soft:#f4f6f8;--acc:#2274c0;--code:#1f2730;--codefg:#e6e9ee}
 @media(prefers-color-scheme:dark){:root{--bg:#14181e;--fg:#e8ecf1;--mute:#9aa6b4;--line:#2b333d;--soft:#1b2129;--acc:#5aa7ea;--code:#0e1216}}
@@ -50,21 +50,21 @@ footer{max-width:1120px;margin:auto;padding:30px 24px 60px;color:var(--mute);fon
 <body>
 <nav><div>
 <b>RapidNative</b>
-<a href="#sprache">Sprache</a><a href="#designer">Designer</a><a href="#ide">IDE</a><a href="#plattformen">Plattformen</a><a href="#web">Web</a><a href="#sicherheit">Sicherheit</a><a href="#tempo">Tempo</a><a href="#toolchain">Toolchain</a>
+<a href="#sprache">Language</a><a href="#designer">Designer</a><a href="#ide">IDE</a><a href="#plattformen">Platforms</a><a href="#web">Web</a><a href="#sicherheit">Safety</a><a href="#tempo">Speed</a><a href="#toolchain">Toolchain</a>
 </div></nav>
 
 <header>
-<h1>Schreiben wie in Visual Basic.<br>Laufen wie nativer Code.</h1>
-<p class="lead">RapidNative ist eine VB-artige Sprache mit eigenem Compiler. Sie übersetzt über LLVM in Maschinencode, ohne virtuelle Maschine und ohne Garbage Collector. Speicherfehler und Datenrennen scheitern schon beim Übersetzen.</p>
+<h1>Write it like Visual Basic.<br>Run it as native code.</h1>
+<p class="lead">RapidNative is a Visual Basic style language with its own compiler. It compiles through LLVM to machine code, with no virtual machine and no garbage collector. Memory errors and data races fail at compile time.</p>
 <span class="tag">Windows</span><span class="tag">macOS</span><span class="tag">Linux</span><span class="tag">Android</span><span class="tag">iOS</span><span class="tag">Web</span><span class="tag">WebAssembly</span><span class="tag">ESP32</span><span class="tag">Bare Metal</span>
-<figure class="hero"><img src="img/designer-desktop.png" alt="Der RapidNative-Designer mit einem Formular" width="1400" height="900"><figcaption>Der Designer: Komponenten auf das Formular ziehen, Eigenschaften setzen, Code entsteht als normale Klasse.</figcaption></figure>
+<figure class="hero"><img src="img/designer-desktop.png" alt="The RapidNative designer with a form" width="1400" height="900"><figcaption>The designer: drag components onto the form, set properties, and the result is an ordinary class.</figcaption></figure>
 </header>
 
 <section id="sprache">
-<h2>Die Sprache</h2>
-<p class="intro">Vertraut für alle, die Visual Basic oder Xojo kennen, mit den Garantien von Rust. Jedes Beispiel unten ist echter RapidNative-Code.</p>
+<h2>The language</h2>
+<p class="intro">Familiar to anyone who knows Visual Basic or Xojo, with the guarantees of Rust. Every example below is real RapidNative code.</p>
 <div class="g2">
-<div><h3>Hallo Welt</h3><pre>Module Main
+<div><h3>Hello world</h3><pre>Module Main
     Sub Main()
         Print "Hello from RapidNative!"
         Dim i As Integer
@@ -73,44 +73,44 @@ footer{max-width:1120px;margin:auto;padding:30px 24px 60px;color:var(--mute);fon
         Next i
     End Sub
 End Module</pre></div>
-<div><h3>Besitz statt Garbage Collector</h3><pre>Dim a As String = "x" &amp; "y"
-Dim b As String = a      ' a ist jetzt verschoben
+<div><h3>Ownership instead of a garbage collector</h3><pre>Dim a As String = "x" &amp; "y"
+Dim b As String = a      ' a has now moved
 Print a
 ' error RN2001: 'a' was moved and has
 ' no value here ...
-Dim c As String = Clone(b)  ' tiefe Kopie</pre></div>
-<div><h3>Exaktes Geld mit Decimal</h3><pre>Dim preis As Decimal = CDec("19.99")
-Dim summe As Decimal = preis * 3
-Print summe                       ' 59.97
+Dim c As String = Clone(b)  ' deep copy</pre></div>
+<div><h3>Exact money with Decimal</h3><pre>Dim price As Decimal = CDec("19.99")
+Dim total As Decimal = price * 3
+Print total                       ' 59.97
 Print CDec("0.1") + CDec("0.2") = CDec("0.3")
-' True: exakt, ohne Rundungsfehler</pre></div>
-<div><h3>Datum und Zeit</h3><pre>Dim d As New Date(2024, 2, 29)
+' True: exact, no rounding errors</pre></div>
+<div><h3>Dates and times</h3><pre>Dim d As New Date(2024, 2, 29)
 Print d.AddMonths(12).ToSQL()   ' 2025-02-28
-Print d.DayOfWeek()             ' 4 (Donnerstag)
+Print d.DayOfWeek()             ' 4 (Thursday)
 Dim t As DateTime = DateTime.Now()
 Print t.ToSQL()</pre></div>
-<div><h3>Threads, die der Compiler prüft</h3><pre>Module Main
+<div><h3>Threads the compiler checks</h3><pre>Module Main
     Dim Total As Locked Long
 
-    Sub Arbeit(n As Integer)
+    Sub Work(n As Integer)
         SyncLock Total
             Total = Total + n
         End SyncLock
     End Sub
 End Module
-' Ohne Locked: error RN2300</pre></div>
-<div><h3>SQL ohne Injection</h3><pre>' {name} wird Parameter, nie SQL-Text
+' Without Locked: error RN2300</pre></div>
+<div><h3>SQL without injection</h3><pre>' {name} becomes a parameter, never SQL text
 Dim rows = db.Query(
     Sql"SELECT * FROM patient WHERE name = {name}")
 
-' Die Datenbankmethoden nehmen keinen String.
-' Der Compiler prüft den Typ jedes {...}.</pre></div>
-<div><h3>Fehler als Werte</h3><pre>Function Parse(t As String) As Integer Throws
-    If t = "" Then Throw New Exception("leer", 1)
+' Database methods do not accept a String.
+' The compiler checks the type of every {...}.</pre></div>
+<div><h3>Errors as values</h3><pre>Function Parse(t As String) As Integer Throws
+    If t = "" Then Throw New Exception("empty", 1)
     Return CInt(t)
 End Function
-' Unbehandelter Aufruf: error RN2401</pre></div>
-<div><h3>Enums mit Daten</h3><pre>Enum Shape
+' Unhandled call: error RN2401</pre></div>
+<div><h3>Enums with data</h3><pre>Enum Shape
     Circle(Radius As Double)
     Square(Side As Double)
 End Enum
@@ -121,23 +121,23 @@ Select Case s
     Case Shape.Square(a)
         Print a * a
 End Select
-' Fehlt ein Fall: error RN2601</pre></div>
+' A missing case: error RN2601</pre></div>
 </div>
-<h3>Objektorientiert</h3>
-<p class="intro">Klassen, Interfaces, Generics und Polymorphie gehören zum Sprachkern. Vererbung, Properties und Events gibt es im Compat-Modus (<code>Option Compat On</code>), voll unterstützt und gedacht für Programme, die aus Xojo kommen.</p>
+<h3>Object oriented</h3>
+<p class="intro">Classes, interfaces, generics and polymorphism are part of the core language. Inheritance, properties and events live in compat mode (<code>Option Compat On</code>), fully supported and meant for programs coming from Xojo.</p>
 </section>
 
 <section id="designer" class="alt"><div>
-<h2>Der Designer</h2>
-<p class="intro">Ein grafischer Editor für alle Plattformen. Komponenten kommen per Drag-and-Drop aufs Formular, jede Eigenschaft ist erklärt, und die Struktur steht links im Baum. Das Ergebnis ist normaler Quelltext, den Git versteht.</p>
+<h2>The designer</h2>
+<p class="intro">One visual editor for every platform. Drag components onto the form, every property is explained, and the structure sits in a tree on the left. The result is plain source code that Git understands.</p>
 <div class="g2">
-<figure><img src="img/designer-desktop.png" alt="Desktop-Formular im Designer" loading="lazy" width="1400" height="900"><figcaption>Desktop-Formular</figcaption></figure>
-<figure><img src="img/designer-mobile.png" alt="Mobile-Formular im Designer" loading="lazy" width="1400" height="900"><figcaption>Mobile-Formular in Telefongröße 390 × 844</figcaption></figure>
-<figure><img src="img/designer-web.png" alt="Web-Formular im Designer" loading="lazy" width="1400" height="900"><figcaption>Web-Formular</figcaption></figure>
-<figure><img src="img/designer-signin.png" alt="Anmeldeformular im Designer" loading="lazy" width="1400" height="900"><figcaption>Anmeldeseite einer Web-Anwendung</figcaption></figure>
+<figure><img src="img/designer-desktop.png" alt="Desktop form in the designer" loading="lazy" width="1400" height="900"><figcaption>Desktop form</figcaption></figure>
+<figure><img src="img/designer-mobile.png" alt="Mobile form in the designer" loading="lazy" width="1400" height="900"><figcaption>Mobile form at phone size, 390 × 844</figcaption></figure>
+<figure><img src="img/designer-web.png" alt="Web form in the designer" loading="lazy" width="1400" height="900"><figcaption>Web form</figcaption></figure>
+<figure><img src="img/designer-signin.png" alt="Sign-in form in the designer" loading="lazy" width="1400" height="900"><figcaption>Sign-in page of a web application</figcaption></figure>
 </div>
-<h3>Formulare sind Quelltext</h3>
-<p class="intro">Oben steht Ihr Code, unten der Teil des Designers. Der Designer liest das Formular aus den <code>@rapidui</code>-Zeilen und lässt alles oberhalb des Trenners unangetastet.</p>
+<h3>Forms are source code</h3>
+<p class="intro">Your code goes on top, the designer's part below. The designer reads the form from the <code>@rapidui</code> lines and leaves everything above the banner untouched.</p>
 <pre>Public Class MainForm
 
     Public Sub New(parent As Integer)
@@ -163,138 +163,138 @@ End Class</pre>
 </div></section>
 
 <section id="ide">
-<h2>Die IDE</h2>
-<p class="intro"><code>rnide</code> ist die eigene Entwicklungsumgebung: Editor mit Sprachfunktionen, Variablen-Panel, Debugger, Git, Terminal, Projektassistent und Installer-Dialog. Sie ist selbst mit tsbRapidUI gebaut.</p>
-<figure><img src="img/ide-desktop.png" alt="Die IDE rnide mit einem Formular im Editor" loading="lazy" width="1500" height="950"><figcaption>Editor mit Projektbaum, Gliederung und dem Trenner des Designers</figcaption></figure>
+<h2>The IDE</h2>
+<p class="intro"><code>rnide</code> is RapidNative's own development environment: an editor with language features, a variables panel, debugger, Git, terminal, project wizard and installer dialog. It is built with tsbRapidUI itself.</p>
+<figure><img src="img/ide-desktop.png" alt="The rnide IDE with a form in the editor" loading="lazy" width="1500" height="950"><figcaption>Editor with project tree, outline and the designer banner</figcaption></figure>
 <div class="g3" style="margin-top:26px">
-<div class="card"><h3>Sprachserver</h3><p>Diagnosen beim Tippen, inklusive Ownership-Prüfung, Vervollständigung, Umbenennen, Referenzen.</p></div>
-<div class="card"><h3>Debugger</h3><p>Haltepunkte, Variablen, Aufrufliste, Threads, auch auf entfernten Rechnern über <code>rnc debug-agent</code>.</p></div>
-<div class="card"><h3>Pakete</h3><p><code>rnc package</code> baut <code>.deb</code>, <code>.rpm</code>, Windows-Setup und <code>.pkg</code> ohne fremde Werkzeuge.</p></div>
-<div class="card"><h3>AI.info</h3><p>Jedes Projekt enthält alles, was ein KI-Assistent braucht: Sprache, Grammatik, Diagnosen und den exakten Formularaufbau.</p></div>
-<div class="card"><h3>Tests</h3><p><code>&lt;Test&gt;</code>-Prozeduren, Formatierer und HTML-Doku gehören zu <code>rnc</code>.</p></div>
-<div class="card"><h3>Datenbanken</h3><p>SQLite (auch verschlüsselt), MySQL/MariaDB, PostgreSQL und Oracle ohne Client.</p></div>
+<div class="card"><h3>Language server</h3><p>Diagnostics as you type, including ownership checks, completion, rename, references.</p></div>
+<div class="card"><h3>Debugger</h3><p>Breakpoints, variables, call stack, threads. Remote debugging through <code>rnc debug-agent</code>.</p></div>
+<div class="card"><h3>Packages</h3><p><code>rnc package</code> builds <code>.deb</code>, <code>.rpm</code>, a Windows setup and <code>.pkg</code> without third-party tools.</p></div>
+<div class="card"><h3>AI.info</h3><p>Every project contains what an AI assistant needs: the language, grammar, diagnostics and the exact form layout.</p></div>
+<div class="card"><h3>Tests</h3><p><code>&lt;Test&gt;</code> procedures, a formatter and HTML docs are part of <code>rnc</code>.</p></div>
+<div class="card"><h3>Databases</h3><p>SQLite (also encrypted), MySQL/MariaDB, PostgreSQL and Oracle without a client.</p></div>
 </div>
 </section>
 
 <section class="alt"><div>
-<h2>Die Oberfläche: tsbRapidUI</h2>
-<p class="intro">Alle Steuerelemente, hell und dunkel. Dieselbe Oberfläche läuft auf jeder Plattform, gezeichnet vom eigenen Renderer. Diese Bilder stammen aus dem mitgelieferten Beispiel <code>examples/showcase</code>.</p>
+<h2>The user interface: tsbRapidUI</h2>
+<p class="intro">All controls, light and dark. The same interface runs on every platform, drawn by its own renderer. These images come from the bundled <code>examples/showcase</code> sample.</p>
 <div class="g2">
-<figure><img src="img/showcase-1.png" alt="Eingabefelder" loading="lazy" width="640" height="440"><figcaption>Eingaben</figcaption></figure>
-<figure><img src="img/showcase-2.png" alt="Auswahlelemente" loading="lazy" width="640" height="440"><figcaption>Auswahl</figcaption></figure>
-<figure><img src="img/showcase-3.png" alt="Listen" loading="lazy" width="640" height="440"><figcaption>Listen</figcaption></figure>
-<figure><img src="img/showcase-5.png" alt="Dunkles Design" loading="lazy" width="640" height="440"><figcaption>Dunkles Design</figcaption></figure>
+<figure><img src="img/showcase-1.png" alt="Input fields" loading="lazy" width="640" height="440"><figcaption>Input</figcaption></figure>
+<figure><img src="img/showcase-2.png" alt="Choice controls" loading="lazy" width="640" height="440"><figcaption>Choices</figcaption></figure>
+<figure><img src="img/showcase-3.png" alt="Lists" loading="lazy" width="640" height="440"><figcaption>Lists</figcaption></figure>
+<figure><img src="img/showcase-5.png" alt="Dark theme" loading="lazy" width="640" height="440"><figcaption>Dark theme</figcaption></figure>
 </div>
 </div></section>
 
 <section id="plattformen">
-<h2>Plattformen</h2>
-<p class="intro">Eine Sprache, eine Oberfläche, jedes Ziel. Die Ausgabe ist überall identisch, weil Zahlenformat und Zeichenbehandlung in der eigenen Laufzeit liegen.</p>
+<h2>Platforms</h2>
+<p class="intro">One language, one interface, every target. Output is identical everywhere because number formatting and text handling live in RapidNative's own runtime.</p>
 <div class="wrap"><table>
-<tr><th>Ziel</th><th>Ergebnis</th><th>Stand</th></tr>
-<tr><td>Linux x64, ARM64, ARMv7</td><td>eine ausführbare Datei</td><td class="ok">gebaut und ausgeführt</td></tr>
-<tr><td>Windows x64</td><td><code>.exe</code>, Setup</td><td class="ok">gebaut, unter Wine ausgeführt</td></tr>
-<tr><td>macOS x64, ARM64</td><td>App, <code>.pkg</code></td><td class="ok">gebaut</td></tr>
-<tr><td>iOS</td><td>App über Xcode</td><td class="ok">auf dem Mac getestet</td></tr>
-<tr><td>Android ARM64, x64</td><td><code>.apk</code> ohne Java und Gradle</td><td class="ok">gebaut und ausgeführt</td></tr>
-<tr><td>Web (Server)</td><td>eine Datei als HTTPS-Server</td><td class="ok">im Browser getestet</td></tr>
-<tr><td>WebAssembly</td><td><code>.wasm</code> im Browser</td><td class="ok">im Browser getestet</td></tr>
-<tr><td>ESP32-C3, -C6</td><td>ESP-IDF-Komponente</td><td>gebaut, nicht auf Hardware getestet</td></tr>
-<tr><td>Bare Metal ARM64, Cortex-M4, x64</td><td>statische Bibliothek</td><td>gebaut</td></tr>
+<tr><th>Target</th><th>Result</th><th>Status</th></tr>
+<tr><td>Linux x64, ARM64, ARMv7</td><td>a single executable</td><td class="ok">built and run</td></tr>
+<tr><td>Windows x64</td><td><code>.exe</code>, Setup</td><td class="ok">built, run under Wine</td></tr>
+<tr><td>macOS x64, ARM64</td><td>app, <code>.pkg</code></td><td class="ok">built</td></tr>
+<tr><td>iOS</td><td>app through Xcode</td><td class="ok">tested on a Mac</td></tr>
+<tr><td>Android ARM64, x64</td><td><code>.apk</code> without Java or Gradle</td><td class="ok">built and run</td></tr>
+<tr><td>Web (Server)</td><td>one file is the HTTPS server</td><td class="ok">tested in the browser</td></tr>
+<tr><td>WebAssembly</td><td><code>.wasm</code> in the browser</td><td class="ok">tested in the browser</td></tr>
+<tr><td>ESP32-C3, -C6</td><td>ESP-IDF component</td><td>built, not tested on hardware</td></tr>
+<tr><td>Bare Metal ARM64, Cortex-M4, x64</td><td>static library</td><td>built</td></tr>
 </table></div>
-<h3>Was im Programm steckt</h3>
-<p class="intro">Laufzeit, Oberfläche, Datenbanktreiber und TLS werden fest eingelinkt. Der Endanwender braucht keine Laufzeit und keine Zusatz-Pakete.</p>
+<h3>What is inside the program</h3>
+<p class="intro">Runtime, user interface, database drivers and TLS are linked in. End users need no runtime and no extra packages.</p>
 <div class="wrap"><table>
-<tr><th>Programm (Linux x64)</th><th class="r">Größe</th><th>Braucht zusätzlich</th></tr>
-<tr><td>Konsole</td><td class="r">5,8 MB</td><td>nur Systembibliotheken</td></tr>
-<tr><td>Desktop-GUI mit Datenbank</td><td class="r">24 MB</td><td>nur Systembibliotheken</td></tr>
-<tr><td>Web-Server mit HTTPS und Datenbank</td><td class="r">23 MB</td><td>nur Systembibliotheken</td></tr>
+<tr><th>Program (Linux x64)</th><th class="r">Size</th><th>Also needs</th></tr>
+<tr><td>Console</td><td class="r">5.8 MB</td><td>system libraries only</td></tr>
+<tr><td>Desktop GUI with database</td><td class="r">24 MB</td><td>system libraries only</td></tr>
+<tr><td>Web server with HTTPS and database</td><td class="r">23 MB</td><td>system libraries only</td></tr>
 </table></div>
-<h3>Bauen für jedes Ziel, von einem Rechner</h3>
+<h3>Build for every target from one machine</h3>
 <pre>rnc build . --target windows-x64
 rnc build . --target macos-arm64
 rnc build . --target linux-arm64
 rnc build . --target android-arm64 --emit apk
 rnc build . --target web
 rnc build Blink.rn --target esp32c3 --profile regulated</pre>
-<p class="small">iOS-Programme werden auf dem Mac mit Xcode gebaut. Signieren und Notarisieren für macOS geschieht ebenfalls auf dem Mac.</p>
+<p class="small">iOS programs are built on a Mac with Xcode. Signing and notarizing for macOS also happen on a Mac.</p>
 <h3>Mobile</h3>
 <div class="g2">
-<figure><img src="img/designer-mobile.png" alt="Formular für Android und iOS" loading="lazy" width="1400" height="900"><figcaption>Ein Formular für Android und iOS, entworfen im Designer. Keine Zeile Java, Kotlin oder Gradle.</figcaption></figure>
-<div><pre>rnc new meineapp --kind mobile
-cd meineapp
+<figure><img src="img/designer-mobile.png" alt="Form for Android and iOS" loading="lazy" width="1400" height="900"><figcaption>Ein Form for Android and iOS, entworfen im Designer. Keine Zeile Java, Kotlin oder Gradle.</figcaption></figure>
+<div><pre>rnc new myapp --kind mobile
+cd myapp
 
 # Android
 rnc build . --target android-arm64 --emit apk
 
-# iOS, auf dem Mac
+# iOS, on a Mac
 rnc build . --target ios-arm64 --emit lib</pre></div>
 </div>
 </section>
 
 <section id="web" class="alt"><div>
-<h2>Web: eine Datei ist der Server</h2>
-<p class="intro">In tsbRapidN Web läuft die Anwendung auf dem Server, jeder Nutzer bekommt eine eigene Sitzung. Programmlogik und Daten verlassen den Server nicht. HTTPS mit Let's Encrypt ist eingebaut, ein nginx ist nicht nötig.</p>
+<h2>Web: one file is the server</h2>
+<p class="intro">With tsbRapidN Web the application runs on the server and every user gets their own session. Program logic and data never leave the server. HTTPS with Let's Encrypt is built in, so no nginx is needed.</p>
 <div class="g2">
-<figure><img src="img/web-chrome.png" alt="Anmeldeseite im Browser" loading="lazy" width="1200" height="800"><figcaption>Die Anmeldeseite der Web-Vorlage im Browser, ein echter Aufruf des Programms</figcaption></figure>
+<figure><img src="img/web-chrome.png" alt="Sign-in page in the browser" loading="lazy" width="1200" height="800"><figcaption>The sign-in page of the web template, a real request to the running program</figcaption></figure>
 <div>
-<h3 style="margin-top:0">Zwei Darstellungsarten</h3>
-<div class="card" style="margin-bottom:12px"><h3><code>RenderMode = pixels</code></h3><p>Der Server zeichnet und schickt nur die geänderten Bereiche.</p></div>
-<div class="card"><h3><code>RenderMode = vector</code></h3><p>Der Browser zeichnet selbst, mit demselben Renderer als WebAssembly. Das spart rund die Hälfte der Server-CPU.</p></div>
+<h3 style="margin-top:0">Two render modes</h3>
+<div class="card" style="margin-bottom:12px"><h3><code>RenderMode = pixels</code></h3><p>The server draws and sends only the changed areas.</p></div>
+<div class="card"><h3><code>RenderMode = vector</code></h3><p>The browser draws, using the same renderer as WebAssembly. This saves about half of the server CPU.</p></div>
 </div>
 </div>
-<h3>Gemessene Kapazität</h3>
-<p class="intro">Web-Vorlage, angemeldete Nutzer, jeder klickt alle 10 Sekunden. 16 Kerne, Lastgenerator auf demselben Rechner. Eigene Logik je Klick kommt hinzu.</p>
+<h3>Measured capacity</h3>
+<p class="intro">Web template, signed-in users, each clicking every 10 seconds. 16 cores, load generator on the same machine. Your own logic per click comes on top.</p>
 <div class="wrap"><table>
-<tr><th>Nutzer</th><th>Pixel: Speicher / CPU</th><th>Vektor: Speicher / CPU</th><th>Klick bis Bild (Median)</th></tr>
-<tr><td>1 000</td><td>303 MB / 1,0 Kerne</td><td>258 MB / 0,5 Kerne</td><td>14–17 ms</td></tr>
-<tr><td>3 000</td><td>892 MB / 3,8 Kerne</td><td>756 MB / 2,0 Kerne</td><td>14–17 ms</td></tr>
+<tr><th>Users</th><th>Pixels: memory / CPU</th><th>Vector: memory / CPU</th><th>Click to image (median)</th></tr>
+<tr><td>1,000</td><td>303 MB / 1.0 cores</td><td>258 MB / 0.5 cores</td><td>14–17 ms</td></tr>
+<tr><td>3,000</td><td>892 MB / 3.8 cores</td><td>756 MB / 2.0 cores</td><td>14–17 ms</td></tr>
 </table></div>
 </div></section>
 
 <section id="sicherheit">
-<h2>Sicherheit im Praxistest</h2>
-<p class="intro">Was üblicherweise erst beim Kunden auffällt, stoppt hier der Compiler oder ein definierter Abbruch.</p>
+<h2>Safety, tested in practice</h2>
+<p class="intro">What usually surfaces at the customer is stopped here by the compiler or a defined abort.</p>
 <div class="wrap"><table>
-<tr><th>Fehler</th><th>Verhalten</th></tr>
-<tr><td>Verwendung nach Move</td><td>Übersetzungsfehler RN2001</td></tr>
-<tr><td>Datenrennen</td><td>Übersetzungsfehler RN2300</td></tr>
-<tr><td>Ganzzahl-Überlauf</td><td>definierter Abbruch mit Datei und Zeile</td></tr>
-<tr><td>Implizites Verengen</td><td>Übersetzungsfehler RN0607</td></tr>
-<tr><td>Index außerhalb, Nothing, Division durch 0</td><td>definierter Abbruch</td></tr>
-<tr><td>SQL-Injection</td><td>Datenbankmethoden nehmen keinen String</td></tr>
-<tr><td>Fremde Programme starten</td><td>nur aus einer beim Übersetzen festgelegten Liste, ohne Shell</td></tr>
+<tr><th>Error</th><th>Behaviour</th></tr>
+<tr><td>Use after move</td><td>Compile error RN2001</td></tr>
+<tr><td>Data race</td><td>Compile error RN2300</td></tr>
+<tr><td>Integer overflow</td><td>defined abort with file and line</td></tr>
+<tr><td>Implicit narrowing</td><td>Compile error RN0607</td></tr>
+<tr><td>Index out of range, Nothing, division by 0</td><td>defined abort</td></tr>
+<tr><td>SQL-Injection</td><td>database methods do not accept a String</td></tr>
+<tr><td>Starting other programs</td><td>only from a list fixed at compile time, without a shell</td></tr>
 </table></div>
-<p class="small">Die Garantien gelten für den Sprachkern. Der Compat-Modus nutzt Referenzzählung und ist auf einen Thread beschränkt, C-Aufrufe über <code>Declare</code> liegen außerhalb der Prüfung.</p>
-<h3>Für regulierte Software</h3>
-<p class="intro">Normatives Sprachhandbuch mit nummerierten Regeln, öffentliche Anomalie-Liste, SOUP-Verzeichnis und <code>rnc validate</code> mit SHA-256-Nachweis, gedacht für den Einsatz nach IEC 62304 Klasse A und B. Das Profil <code>regulated</code> verbietet Heap, Rekursion und dynamische Threads.</p>
+<p class="small">These guarantees apply to the core language. Compat mode uses reference counting and is limited to one thread, and C calls through <code>Declare</code> are outside the checks.</p>
+<h3>For regulated software</h3>
+<p class="intro">A normative language manual with numbered rules, a published anomaly list, a SOUP register and <code>rnc validate</code> with SHA-256 evidence, intended for use under IEC 62304 classes A and B. The <code>regulated</code> profile forbids the heap, recursion and dynamic threads.</p>
 </section>
 
 <section id="tempo" class="alt"><div>
-<h2>Tempo</h2>
-<p class="intro">Fünf gleiche Aufgaben in Millisekunden, mittlerer Wert aus drei Läufen, AMD Ryzen 7 5825U. Python ist ein Einzellauf.</p>
+<h2>Speed</h2>
+<p class="intro">Five identical tasks in milliseconds, median of three runs, AMD Ryzen 7 5825U. Python is a single run.</p>
 <div class="wrap"><table>
-<tr><th>Aufgabe</th><th class="r">RapidNative</th><th class="r">C#/.NET 10</th><th class="r">Python 3.14</th></tr>
-<tr><td>Rekursion, fib(35)</td><td class="r">35</td><td class="r">56</td><td class="r">1040</td></tr>
-<tr><td>Sieb, 5 Mio.</td><td class="r">40</td><td class="r">26</td><td class="r">579</td></tr>
-<tr><td>Fließkomma, 20 Mio.</td><td class="r">60</td><td class="r">60</td><td class="r">2008</td></tr>
-<tr><td>2 Mio. Objekte</td><td class="r">107</td><td class="r">123</td><td class="r">649</td></tr>
-<tr><td>1 Mio. Strings</td><td class="r">93</td><td class="r">78</td><td class="r">186</td></tr>
-<tr><td><b>Summe</b></td><td class="r"><b>335</b></td><td class="r"><b>343</b></td><td class="r"><b>4462</b></td></tr>
+<tr><th>Task</th><th class="r">RapidNative</th><th class="r">C#/.NET 10</th><th class="r">Python 3.14</th></tr>
+<tr><td>Recursion, fib(35)</td><td class="r">35</td><td class="r">56</td><td class="r">1040</td></tr>
+<tr><td>Sieve, 5 million</td><td class="r">40</td><td class="r">26</td><td class="r">579</td></tr>
+<tr><td>Floating point, 20 million</td><td class="r">60</td><td class="r">60</td><td class="r">2008</td></tr>
+<tr><td>2 million objects</td><td class="r">107</td><td class="r">123</td><td class="r">649</td></tr>
+<tr><td>1 million strings</td><td class="r">93</td><td class="r">78</td><td class="r">186</td></tr>
+<tr><td><b>Total</b></td><td class="r"><b>335</b></td><td class="r"><b>343</b></td><td class="r"><b>4462</b></td></tr>
 </table></div>
 </div></section>
 
 <section id="toolchain">
-<h2>Eine Toolchain, auf jedem Rechner gleich</h2>
-<p class="intro">Jede <code>rnc</code>-Version nutzt genau eine geprüfte Toolchain. Sie wird beim ersten Start automatisch geladen, jede Datei wird per SHA-256 geprüft, und aktiv wird nur ein vollständiges Ergebnis. So baut derselbe Stand bei jedem Entwickler gleich.</p>
+<h2>One toolchain, the same on every machine</h2>
+<p class="intro">Every <code>rnc</code> version uses exactly one checked toolchain. It is downloaded automatically on first start, every file is verified by SHA-256, and only a complete result becomes active. The same version builds the same way for every developer.</p>
 <pre>$ rnc toolchain install
 Downloading toolchain, please wait ...
 rnc: Zig 0.16.0 and 15 package(s), 643 MB
 rnc: installing ...
 Thanks for waiting. The toolchain is ready.</pre>
-<p class="small">Pakete: <a href="https://github.com/thorstenstueker/rapidnative-toolchain/releases">rapidnative-toolchain</a>. Für Rechner ohne Internet gibt es <code>rnc toolchain import</code>.</p>
+<p class="small">Packages: <a href="https://github.com/thorstenstueker/rapidnative-toolchain/releases">rapidnative-toolchain</a>. For machines without internet there is <code>rnc toolchain import</code>.</p>
 </section>
 
-<footer>RapidNative 0.11.0 · MIT OR Apache-2.0 · Alle Abbildungen sind echte Aufnahmen der Software.</footer>
+<footer>RapidNative 0.11.0 · MIT OR Apache-2.0 · All images are real captures of the software.</footer>
 </body>
 </html>
